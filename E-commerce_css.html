@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IronCore Fitness Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+            color: #f5f5f5;
+        }
+
+        /* TOP NAVBAR */
+        .top-nav {
+            background: #000;
+            padding: 8px;
+            text-align: center;
+            font-size: 13px;
+            border-bottom: 1px solid #333;
+        }
+
+        .top-nav a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        .top-nav a:hover {
+            color: white;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(to right, #1c1c1c, #2a2a2a);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        header h1 {
+            font-size: 34px;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* MAIN NAVBAR */
+        .main-nav {
+            background: #111;
+            padding: 18px;
+            text-align: center;
+            border-bottom: 2px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-nav a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 25px;
+            font-weight: bold;
+            position: relative;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .main-nav a::after {
+            content: "";
+            width: 0%;
+            height: 2px;
+            background: #777;
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            transition: 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: white;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* CART */
+        .cart {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: #333;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        }
+
+        /* SECTIONS */
+        section {
+            display: none;
+            padding: 50px 20px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {opacity:0; transform: translateY(20px);}
+            to {opacity:1; transform: translateY(0);}
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: #bbb;
+            margin-bottom: 25px;
+        }
+
+        .hero button {
+            padding: 12px 30px;
+            background: #444;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .hero button:hover {
+            background: #666;
+            transform: scale(1.05);
+        }
+
+        /* PRODUCTS */
+        .products {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .product {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 260px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.4s;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        }
+
+        .product img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #ccc;
+        }
+
+        button {
+            background: #333;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #555;
+            transform: scale(1.05);
+        }
+
+        /* CONTACT */
+        form {
+            text-align: center;
+        }
+
+        input, textarea {
+            width: 300px;
+            padding: 10px;
+            margin: 10px;
+            background: #222;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 8px;
+        }
+
+        input[type="submit"] {
+            background: #444;
+        }
+
+        input[type="submit"]:hover {
+            background: #666;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:768px){
+            .products{
+                flex-direction:column;
+                align-items:center;
+            }
+
+            .hero h2{
+                font-size:28px;
+            }
+
+            .cart{
+                top:110px;
+            }
+        }
+
+    </style>
+
+    <script>
+        function showPage(pageId) {
+            var sections = document.querySelectorAll("section");
+            sections.forEach(function(section) {
+                section.classList.remove("active");
+            });
+            document.getElementById(pageId).classList.add("active");
+        }
+
+        let cartCount = 0;
+        function addToCart() {
+            cartCount++;
+            document.getElementById("cartCount").innerText = cartCount;
+        }
+    </script>
+
+</head>
+
+<body>
+
+<!-- TOP NAVBAR -->
+<nav class="top-nav">
+    <a href="E-commerce_css.html">E-Commerce CSS</a> |
+    <a href="E-Commerce.html">E-Commerce</a> |
+    <a href="Personal website css.html">Personal Website CSS</a> |
+    <a href="Personal website.html">Personal Website</a>
+</nav>
+
+<header>
+    <h1>💪 IronCore Fitness</h1>
+    <p>Premium Gym Equipment & Supplements</p>
+</header>
+
+<!-- MAIN NAVBAR -->
+<nav class="main-nav">
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('products')">Products</a>
+    <a onclick="showPage('contact')">Contact</a>
+</nav>
+
+<!-- CART -->
+<div class="cart">
+    🛒 Cart: <span id="cartCount">0</span>
+</div>
+
+<!-- HOME -->
+<section id="home" class="active">
+    <div class="hero">
+        <h2>Build Strength. Build Power.</h2>
+        <p>Everything you need for your transformation journey.</p>
+        <button onclick="showPage('products')">Shop Now</button>
+    </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+    <h2 style="text-align:center; margin-bottom:40px;">Our Products</h2>
+
+    <div class="products">
+
+        <div class="product">
+            <h3>Adjustable Dumbbells</h3>
+            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61">
+            <div class="price">₹4,999</div>
+            <button onclick="addToCart()">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <h3>Whey Protein (1kg)</h3>
+            <img src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a">
+            <div class="price">₹2,499</div>
+            <button onclick="addToCart()">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <h3>Olympic Barbell</h3>
+            <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e">
+            <div class="price">₹7,999</div>
+            <button onclick="addToCart()">Add to Cart</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <h2 style="text-align:center;">Contact Us</h2>
+    <form>
+        <input type="text" placeholder="Your Name"><br>
+        <input type="email" placeholder="Your Email"><br>
+        <textarea rows="4" placeholder="Your Message"></textarea><br>
+        <input type="submit" value="Send Message">
+    </form>
+</section>
+
+<footer>
+    © 2026 IronCore Fitness Store | All Rights Reserved
+</footer>
+
+</body>
+</html>

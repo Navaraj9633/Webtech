@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navaraj Ashokan | Personal Website</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f4f8ff;
+            color: #1a1a1a;
+        }
+
+        header {
+            background: linear-gradient(to right, #0f4c81, #1e90ff);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            margin-top: 8px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Top Navbar */
+        nav {
+            background-color: white;
+            text-align: center;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            color: #0f4c81;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        nav a::after {
+            content: "";
+            width: 0;
+            height: 2px;
+            background: #1e90ff;
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            transition: 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #1e90ff;
+        }
+
+        section {
+            display: none;
+            padding: 40px 20px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #0f4c81;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 70%;
+            margin: auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+
+        ul, ol {
+            line-height: 1.8;
+            padding-left: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cce0ff;
+            border-radius: 6px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #1e90ff;
+            box-shadow: 0 0 5px rgba(30,144,255,0.3);
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(to right, #0f4c81, #1e90ff);
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #0f4c81;
+            color: white;
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .box {
+                width: 90%;
+            }
+        }
+    </style>
+
+    <script>
+        function showPage(pageId) {
+            var sections = document.querySelectorAll("section");
+            sections.forEach(function(section) {
+                section.classList.remove("active");
+            });
+            document.getElementById(pageId).classList.add("active");
+        }
+    </script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>Welcome to My Website</h1>
+    <p>Hello! I'm Navaraj Ashokan</p>
+</header>
+
+<!-- External Links Navbar -->
+<nav>
+    <a href="E-commerce.html">E-Commerce CSS</a>
+    <a href="E-Commerce.html">E-commerce</a>
+    <a href="Personal website css.html">Personal Website CSS</a>
+    <a href="Personal website.html">Personal Website</a>
+</nav>
+
+<!-- Page Navigation -->
+<nav>
+    <a onclick="showPage('about')">About</a>
+    <a onclick="showPage('skills')">Skills</a>
+    <a onclick="showPage('projects')">Projects</a>
+    <a onclick="showPage('contact')">Contact</a>
+</nav>
+
+<section id="about" class="active">
+    <div class="box">
+        <h2>About Me</h2>
+        <p>
+            I am a motivated Computer Science student with a strong foundation in programming and web development. I am passionate about leveraging modern technologies to build efficient, scalable, and user-focused solutions while continuously enhancing my technical and problem-solving skills.
+    </p>
+        </p>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="box">
+        <h2>My Skills</h2>
+        <ul>
+            <li>HTML & CSS</li>
+            <li>Python Programming</li>
+            <li>JavaScript</li>
+            <li>Problem Solving</li>
+        </ul>
+    </div>
+</section>
+
+<section id="projects">
+    <div class="box">
+        <h2>My Projects</h2>
+        <ol>
+            <li>E-Commerce Website</li>
+            <li>AI Sign Language Translator</li>
+            <li>Personal Portfolio Website</li>
+        </ol>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="box">
+        <h2>Contact Me</h2>
+        <form>
+            <label>Name</label>
+            <input type="text">
+
+            <label>Email</label>
+            <input type="email">
+
+            <label>Message</label>
+            <textarea rows="4"></textarea>
+
+            <input type="submit" value="Send Message">
+        </form>
+    </div>
+</section>
+
+<footer>
+    © 2026 Navaraj | Personal Website
+</footer>
+
+</body>
+</html>
